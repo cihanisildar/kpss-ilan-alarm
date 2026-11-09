@@ -1,0 +1,19 @@
+{
+  "name": "kpss-ilan-alarm",
+  "version": "0.1.0",
+  "description": "Kamu personel ilanı alarm botu (ilan.gov.tr -> Telegram)",
+  "type": "module",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "start": "node --no-warnings=ExperimentalWarning src/index.js",
+    "once": "node --no-warnings=ExperimentalWarning src/index.js --once",
+    "dry": "node --no-warnings=ExperimentalWarning src/index.js --once --dry",
+    "test-telegram": "node src/index.js --test-telegram",
+    "test": "node --no-warnings=ExperimentalWarning --test test/match.test.js"
+  },
+  "dependencies": {
+    "@vercel/blob": "2.8.2"
+  }
+}

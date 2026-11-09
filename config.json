@@ -1,0 +1,28 @@
+{
+  "intervalMinutes": 20,
+  "lookbackDays": 3,
+  "reminderDaysBefore": 2,
+  "health": { "consecutiveRuns": 3, "minExpectedAds": 1 },
+  "alerts": [
+    {
+      "name": "Tekniker / Mekatronik - İstanbul & Kocaeli",
+      "cities": [34, 41],
+      "keywords": [
+        "tekniker",
+        "mekatronik",
+        "teknisyen",
+        "otomasyon",
+        "elektronik teknolojisi",
+        "makine teknolojisi",
+        "biyomedikal cihaz",
+        "teknik personel"
+      ],
+      "exclude": [
+        "ogretim uyesi",
+        "ogretim gorevlisi",
+        "arastirma gorevlisi"
+      ],
+      "searchContent": true
+    }
+  ]
+}

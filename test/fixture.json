@@ -1,0 +1,15 @@
+{
+  "search": { "result": { "numFound": 4, "ads": [
+    { "id": "a1", "adNo": "ILN1", "title": "BİLGİSAYAR MÜHENDİSİ ALIMI YAPILACAKTIR", "advertiserName": "KOCAELİ BÜYÜKŞEHİR BELEDİYESİ", "addressCityName": "KOCAELİ", "addressCountyName": "İZMİT", "urlStr": "/ilan/a1", "adTypeFilters": [] },
+    { "id": "a2", "adNo": "ILN2", "title": "SÖZLEŞMELİ PERSONEL ALIM İLANI", "advertiserName": "İSTANBUL ÜNİVERSİTESİ", "addressCityName": "İSTANBUL", "addressCountyName": "FATİH", "urlStr": "/ilan/a2", "adTypeFilters": [] },
+    { "id": "a3", "adNo": "ILN3", "title": "ÖĞRETİM ÜYESİ ALIM İLANI (Bilgisayar Mühendisliği)", "advertiserName": "BURSA TEKNİK ÜNİVERSİTESİ", "addressCityName": "BURSA", "urlStr": "/ilan/a3", "adTypeFilters": [] },
+    { "id": "a4", "adNo": "ILN4", "title": "Yazılım Mühendisi Alımı", "advertiserName": "ANKARA ÜNİVERSİTESİ", "addressCityName": "ANKARA", "urlStr": "/ilan/a4", "adTypeFilters": [] },
+    { "id": "a5", "adNo": "ILN5", "title": "Temizlik Personeli Alımı", "advertiserName": "ANTALYA İL SAĞLIK MÜDÜRLÜĞÜ", "addressCityName": "ANTALYA", "urlStr": "/ilan/a5", "adTypeFilters": [] }
+  ] } },
+  "details": {
+    "a1": { "content": "<p>Son Başvuru Tarihi: 06.11.2026</p>" },
+    "a2": { "content": "<table><tr><td>Unvan</td><td>Bilişim Personeli (Yazılım Geliştirici)</td></tr></table><p>Başvurular 01.11.2026 - <b>son başvuru</b> 30.12.2026 tarihine kadar</p>" },
+    "a4": { "content": "x" },
+    "a5": { "content": "" }
+  }
+}
