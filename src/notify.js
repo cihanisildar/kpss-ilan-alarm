@@ -1,8 +1,11 @@
 // Telegram bildirimleri. Token/chat ID yoksa sadece konsola yazar.
 const token = () => process.env.TELEGRAM_BOT_TOKEN;
-const chatId = () => process.env.TELEGRAM_CHAT_ID;
+// TELEGRAM_CHAT_ID virgülle ayrılmış birden fazla sohbet olabilir (ör. özel sohbet + grup).
+// Bildirimler hepsine gider, komutlar hepsinden kabul edilir.
+export const chatIds = () =>
+  String(process.env.TELEGRAM_CHAT_ID || '').split(',').map((s) => s.trim()).filter(Boolean);
 
-export const telegramEnabled = () => Boolean(token() && chatId());
+export const telegramEnabled = () => Boolean(token() && chatIds().length);
 export const hasToken = () => Boolean(token());
 
 export const esc = (s = '') =>
@@ -34,14 +37,18 @@ function chunks(text, max = 3800) {
 }
 
 /** Konsola yazar; Telegram ayarlıysa (ve dry değilse) mesaj da atar. */
-export async function send(html, { dry = false, to = chatId() } = {}) {
+/** Konsola yazar; Telegram ayarlıysa (ve dry değilse) mesaj da atar. `to` yoksa tüm sohbetlere gönderir. */
+export async function send(html, { dry = false, to } = {}) {
   console.log('\n🔔 ' + html.replace(/<[^>]+>/g, '').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&') + '\n');
-  if (dry || !token() || !to) return;
-  for (const part of chunks(html)) {
-    try {
-      await tg('sendMessage', { chat_id: to, text: part, parse_mode: 'HTML', disable_web_page_preview: true });
-    } catch (e) {
-      console.error('Telegram gönderim hatası:', e.message);
+  const targets = to ? [to] : chatIds();
+  if (dry || !token() || !targets.length) return;
+  for (const chat of targets) {
+    for (const part of chunks(html)) {
+      try {
+        await tg('sendMessage', { chat_id: chat, text: part, parse_mode: 'HTML', disable_web_page_preview: true });
+      } catch (e) {
+        console.error(`Telegram gönderim hatası (${chat}):`, e.message);
+      }
     }
   }
 }

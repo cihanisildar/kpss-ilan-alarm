@@ -2,7 +2,7 @@
 // Depolamadan bağımsızdır: lokalde SQLite, Vercel'de Upstash Redis store'u ile çalışır.
 import { searchPersonnelAds, getAdDetail } from './ilangov.js';
 import { compileAlert, cityMatches, textMatches, excluded } from './match.js';
-import { send as rawSend, formatAd, formatReminder, esc } from './notify.js';
+import { send as rawSend, formatAd, formatReminder, esc, chatIds } from './notify.js';
 import { CITIES } from './cities.js';
 import { norm, htmlToText, extractDeadline } from './text.js';
 
@@ -220,15 +220,15 @@ export function createBot({ store, config, log = console.log, dry = false, inter
     if (!msg?.text) return;
     if (u.update_id != null && !(await store.claimUpdate(u.update_id))) return; // tekrar gelen update
     const chat = String(msg.chat.id);
-    const allowed = process.env.TELEGRAM_CHAT_ID;
+    const allowed = chatIds();
 
-    if (!allowed) {
+    if (!allowed.length) {
       log(`>>> Chat ID'n: ${chat}  —  TELEGRAM_CHAT_ID=${chat} olarak ayarla.`);
       await send(`Chat ID'n: <code>${chat}</code>\nBunu <code>TELEGRAM_CHAT_ID</code> ortam değişkenine yaz.`, { to: chat });
       await store.flush?.();
       return;
     }
-    if (chat !== String(allowed)) { log(`Yetkisiz sohbet yok sayıldı: ${chat}`); return; }
+    if (!allowed.includes(chat)) { log(`Yetkisiz sohbet yok sayıldı: ${chat}`); return; }
 
     const cmd = msg.text.trim().split(/\s+/)[0].replace(/^\//, '').replace(/@.*$/, '').toLowerCase();
     const key = { start: 'yardim', help: 'yardim', 'tümü': 'tumu', 'yardım': 'yardim' }[cmd] || cmd;
