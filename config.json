@@ -1,6 +1,6 @@
 {
   "intervalMinutes": 20,
-  "lookbackDays": 3,
+  "lookbackDays": 30,
   "reminderDaysBefore": 2,
   "health": { "consecutiveRuns": 3, "minExpectedAds": 1 },
   "alerts": [

@@ -83,7 +83,8 @@ export function createBot({ store, config, log = console.log, dry = false, inter
         ad.deadline = deadline;
         const fp = fingerprint(ad);
         let notifiedAt = null;
-        if (hit && !(await store.fpNotified(fp))) {
+        const expired = ad.deadline && ad.deadline < todayIso(); // son başvurusu geçmiş ilanı bildirme
+        if (hit && !expired && !(await store.fpNotified(fp))) {
           notifiedAt = nowTr();
           res.matched.push({ ad, alert: hit });
           if (!firstRun) await send(formatAd(ad, hit.name));
