@@ -64,7 +64,7 @@ function mapAd(ad) {
  * Son `days` günde yayımlanmış personel ilanlarını getirir.
  * cityIds verilirse her şehir için ayrı sorgu atar, yoksa tüm Türkiye.
  */
-export async function searchPersonnelAds({ days = 3, cityIds = [], pageSize = 50, maxPages = 10 } = {}) {
+export async function searchPersonnelAds({ days = 3, cityIds = [], pageSize = 20, maxPages = 15 } = {}) {
   if (FIXTURE) return { ads: FIXTURE.search.result.ads.map(mapAd), total: FIXTURE.search.result.numFound };
 
   const since = ddmmyyyy(new Date(Date.now() - days * 86400_000));
